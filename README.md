@@ -1,39 +1,9 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+Based on https://github.com/aloisdeniel/asgard_shop.git, slightly redesigned for Freeje
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+Documents :
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+[Slides](https://www.figma.com/proto/TBq8pQIi94evB7TeXDDzRt/FlutterViking---Design-Systems?page-id=123%3A363&node-id=123%3A364&viewport=241%2C48%2C0.07&scaling=contain&starting-point-node-id=123%3A364)
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+[UX/UI/Design System Figma document](https://www.figma.com/file/TBq8pQIi94evB7TeXDDzRt/FlutterViking---Design-Systems?node-id=15%3A408)
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+[UI Prototype](https://www.figma.com/proto/TBq8pQIi94evB7TeXDDzRt/FlutterViking---Design-Systems?page-id=4%3A249&node-id=4%3A250&viewport=241%2C48%2C2.7&scaling=min-zoom&starting-point-node-id=4%3A250)
