@@ -1,3 +1,11 @@
+Основные настройки в src/theme/data
+В данный момент используются, например, colors, typography, spacing.
+Надо заметить, что есть механизм responsive, - т.е. и типография, и спейсинги есть для разных размеров.
+
+А сами виджеты в src/widgets
+Сейчас пока есть только несколько кнопок, скаффолд. Button, button_login, button_menu, text, text_link.
+Например, в виджет "текст" встроен механизм, который позволяет заменять в тексте маркеры на виджеты (чтобы красиво встраивать ссылки в текст).
+
 Based on https://github.com/aloisdeniel/asgard_shop.git, slightly redesigned for Freeje
 
 Documents :
