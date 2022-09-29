@@ -6,10 +6,10 @@ import 'package:style/style.dart';
 class AppBase extends StatelessWidget {
   const AppBase({
     Key? key,
-    required this.routerConfig,
-    //required this.routerDelegate,
-    //required this.routeInformationParser,
-    //this.routeInformationProvider,
+    //required this.routerConfig,
+    required this.routerDelegate,
+    required this.routeInformationParser,
+    this.routeInformationProvider,
     this.backButtonDispatcher,
     this.debugShowGrid = false,
     this.title = '',
@@ -37,15 +37,15 @@ class AppBase extends StatelessWidget {
   final bool useInheritedMediaQuery;
   final bool debugShowGrid;
   final bool debugShowCheckedModeBanner;
-  //final RouteInformationProvider? routeInformationProvider;
-  //final RouteInformationParser<Object> routeInformationParser;
+  final RouteInformationProvider? routeInformationProvider;
+  final RouteInformationParser<Object> routeInformationParser;
   final Map<ShortcutActivator, Intent>? shortcuts;
   final List<Locale> supportedLocales;
   final String title;
   final String Function(BuildContext)? onGenerateTitle;
   final BackButtonDispatcher? backButtonDispatcher;
-  //final RouterDelegate<Object> routerDelegate;
-  final RouterConfig<Object> routerConfig;
+  final RouterDelegate<Object> routerDelegate;
+  //final RouterConfig<Object> routerConfig;
   final Map<Type, Action<Intent>>? actions;
   final String? restorationScopeId;
   final bool showSemanticsDebugger;
@@ -84,10 +84,10 @@ class AppBase extends StatelessWidget {
         final theme = AppTheme.of(context);
         return WidgetsApp.router(
           key: GlobalObjectKey(this),
-          //routeInformationProvider: routeInformationProvider,
-          //routeInformationParser: routeInformationParser,
-          //routerDelegate: routerDelegate,
-          routerConfig: routerConfig,
+          routeInformationProvider: routeInformationProvider,
+          routeInformationParser: routeInformationParser,
+          routerDelegate: routerDelegate,
+          //routerConfig: routerConfig,
           backButtonDispatcher: backButtonDispatcher,
           builder: _appBuilder,
           title: title,
