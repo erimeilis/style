@@ -49,7 +49,7 @@ class AppIcon extends StatelessWidget {
   })  : size = AppIconSize.big,
         super(key: key);
 
-  final String data;
+  final IconData data;
   final Color? color;
   final AppIconSize size;
 
@@ -57,16 +57,7 @@ class AppIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AppTheme.of(context);
     final color = this.color ?? theme.colors.icons;
-    return Text(
-      data,
-      style: TextStyle(
-        fontFamily: theme.icons.fontFamily,
-        package: theme.icons.fontPackage,
-        color: color,
-        fontSize: theme.icons.sizes.resolve(size),
-        decoration: TextDecoration.none,
-      ),
-    );
+    return Icon(data, color: color);
   }
 }
 
@@ -79,7 +70,7 @@ class AppAnimatedIcon extends StatelessWidget {
     this.duration = const Duration(milliseconds: 200),
   }) : super(key: key);
 
-  final String data;
+  final IconData data;
   final Color? color;
   final AppIconSize size;
   final Duration duration;
@@ -107,8 +98,9 @@ class AppAnimatedIcon extends StatelessWidget {
         decoration: TextDecoration.none,
       ),
       duration: duration,
-      child: Text(
+      child: Icon(
         data,
+        color: color,
       ),
     );
   }

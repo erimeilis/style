@@ -1,17 +1,38 @@
 import 'package:style/style.dart';
 import 'package:tap_builder/tap_builder.dart';
 
+enum AppButtonLevel {
+  button,
+  p18,
+  p20,
+  p24,
+  paragraph2,
+  t36,
+  title2,
+  title3,
+}
+
 class AppButton extends StatelessWidget {
   const AppButton({
     Key? key,
     required this.title,
     this.onTap,
     this.mainAxisSize = MainAxisSize.min,
+    this.level = AppButtonLevel.p18,
   }) : super(key: key);
+
+  const AppButton.button({
+    Key? key,
+    required this.title,
+    this.onTap,
+    this.mainAxisSize = MainAxisSize.min,
+  })  : level = AppButtonLevel.button,
+        super(key: key);
 
   final String title;
   final MainAxisSize mainAxisSize;
   final VoidCallback? onTap;
+  final AppButtonLevel level;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +46,7 @@ class AppButton extends StatelessWidget {
               selected: true,
               child: AppButtonLayout.hovered(
                 title: title,
+                level: level,
                 mainAxisSize: mainAxisSize,
               ),
             );
@@ -34,6 +56,7 @@ class AppButton extends StatelessWidget {
               selected: true,
               child: AppButtonLayout.pressed(
                 title: title,
+                level: level,
                 mainAxisSize: mainAxisSize,
               ),
             );
@@ -43,6 +66,7 @@ class AppButton extends StatelessWidget {
               selected: true,
               child: AppButtonLayout.disabled(
                 title: title,
+                level: level,
                 mainAxisSize: mainAxisSize,
               ),
             );
@@ -52,6 +76,7 @@ class AppButton extends StatelessWidget {
               selected: true,
               child: AppButtonLayout.inactive(
                 title: title,
+                level: level,
                 mainAxisSize: mainAxisSize,
               ),
             );
@@ -72,6 +97,7 @@ class AppButtonLayout extends StatelessWidget {
   const AppButtonLayout.inactive({
     Key? key,
     required this.title,
+    required this.level,
     this.mainAxisSize = MainAxisSize.min,
     this.inactiveBackgroundColor1,
     this.disabledBackgroundColor1,
@@ -88,6 +114,7 @@ class AppButtonLayout extends StatelessWidget {
   const AppButtonLayout.disabled({
     Key? key,
     required this.title,
+    required this.level,
     this.mainAxisSize = MainAxisSize.min,
     this.inactiveBackgroundColor1,
     this.disabledBackgroundColor1,
@@ -104,6 +131,7 @@ class AppButtonLayout extends StatelessWidget {
   const AppButtonLayout.hovered({
     Key? key,
     required this.title,
+    required this.level,
     this.mainAxisSize = MainAxisSize.min,
     this.inactiveBackgroundColor1,
     this.disabledBackgroundColor1,
@@ -120,6 +148,7 @@ class AppButtonLayout extends StatelessWidget {
   const AppButtonLayout.pressed({
     Key? key,
     required this.title,
+    required this.level,
     this.mainAxisSize = MainAxisSize.min,
     this.inactiveBackgroundColor1,
     this.disabledBackgroundColor1,
@@ -134,6 +163,7 @@ class AppButtonLayout extends StatelessWidget {
         super(key: key);
 
   final String title;
+  final AppButtonLevel level;
   final MainAxisSize mainAxisSize;
   final AppButtonState _state;
   final Color? inactiveBackgroundColor1;
@@ -150,6 +180,33 @@ class AppButtonLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AppTheme.of(context);
     final title = this.title;
+    var textlevel = AppTextLevel.p18;
+    switch (level) {
+      case AppButtonLevel.button:
+        textlevel = AppTextLevel.button;
+        break;
+      case AppButtonLevel.p18:
+        textlevel = AppTextLevel.p18;
+        break;
+      case AppButtonLevel.p20:
+        textlevel = AppTextLevel.p20;
+        break;
+      case AppButtonLevel.p24:
+        textlevel = AppTextLevel.p24;
+        break;
+      case AppButtonLevel.paragraph2:
+        textlevel = AppTextLevel.paragraph2;
+        break;
+      case AppButtonLevel.t36:
+        textlevel = AppTextLevel.t36;
+        break;
+      case AppButtonLevel.title2:
+        textlevel = AppTextLevel.title2;
+        break;
+      case AppButtonLevel.title3:
+        textlevel = AppTextLevel.title3;
+        break;
+    }
     final foregroundColor = this.foregroundColor ?? theme.colors.white;
     final backgroundColor1 = () {
       switch (_state) {
@@ -194,12 +251,8 @@ class AppButtonLayout extends StatelessWidget {
         gradient: LinearGradient(begin: const Alignment(0.14, 0.2), end: const Alignment(0.86, 0.8), colors: [backgroundColor1, backgroundColor2]),
       ),
       child: AppContainer(
-          padding: const AppEdgeInsets.symmetric(vertical: AppGapSize.bigger, horizontal: AppGapSize.large),
-          child: AppText.button(
-            title,
-            color: foregroundColor,
-            fontWeight: fontWeight,
-          )),
+          padding: const AppEdgeInsets.symmetric(vertical: AppGapSize.regular18, horizontal: AppGapSize.large97),
+          child: AppText(title, color: foregroundColor, fontWeight: fontWeight, level: textlevel)),
     );
   }
 }

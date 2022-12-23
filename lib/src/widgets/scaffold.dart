@@ -71,3 +71,42 @@ class _AppScaffoldState extends State<AppScaffold> with SingleTickerProviderStat
     }
   }
 }
+
+class AppTabScaffold extends StatefulWidget {
+  @override
+  _AppTabScaffoldState createState() => _AppTabScaffoldState();
+
+  const AppTabScaffold({
+    Key? key,
+    required this.body,
+    required this.topBar,
+  }) : super(key: key);
+
+  final Widget body;
+  final Widget topBar;
+}
+
+class _AppTabScaffoldState extends State<AppTabScaffold> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(duration: const Duration(seconds: 2), vsync: this);
+    _animation = IntTween(begin: 100, end: 0).animate(_animationController);
+    _animation.addListener(() => setState(() {}));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = AppTheme.of(context);
+
+    return DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [theme.colors.bgGradientStart, theme.colors.bgGradientEnd], begin: Alignment.topRight),
+        ),
+        child:
+            Scaffold(backgroundColor: Colors.transparent, body: Column(children: [SizedBox(height: 40, child: widget.topBar), Expanded(child: widget.body)])));
+  }
+}

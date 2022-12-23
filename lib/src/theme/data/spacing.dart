@@ -4,66 +4,77 @@ import 'package:flutter/widgets.dart';
 
 class AppSpacingData extends Equatable {
   const AppSpacingData(
-      {required this.small,
-      required this.semiSmall,
-      required this.regular,
-      required this.bigger,
-      required this.semiBig,
-      required this.big,
-      required this.large});
+      {required this.small6,
+      required this.small8,
+      required this.regular15,
+      required this.regular18,
+      required this.big25,
+      required this.big30,
+      required this.big35,
+      required this.large97});
 
   factory AppSpacingData.regular() => const AppSpacingData(
-        small: 6,
-        semiSmall: 8,
-        regular: 15,
-        bigger: 18,
-        semiBig: 25,
-        big: 35,
-        large: 97,
+        small6: 6,
+        small8: 8,
+        regular15: 15,
+        regular18: 18,
+        big25: 25,
+        big30: 30,
+        big35: 35,
+        large97: 97,
       );
 
   factory AppSpacingData.small() => const AppSpacingData(
-        small: 2,
-        semiSmall: 4,
-        regular: 8,
-        bigger: 12,
-        semiBig: 15,
-        big: 24,
-        large: 45,
+        small6: 2,
+        small8: 4,
+        regular15: 8,
+        regular18: 12,
+        big25: 15,
+        big30: 20,
+        big35: 24,
+        large97: 45,
       );
 
-  final double small;
-  final double semiSmall;
-  final double regular;
-  final double bigger;
-  final double semiBig;
-  final double big;
-  final double large;
+  final double small6;
+  final double small8;
+  final double regular15;
+  final double regular18;
+  final double big25;
+  final double big30;
+  final double big35;
+  final double large97;
 
   AppEdgeInsetsSpacingData asInsets() => AppEdgeInsetsSpacingData(this);
 
   @override
   List<Object?> get props => [
-        small.named('small'),
-        semiSmall.named('semiSmall'),
-        regular.named('regular'),
-        semiBig.named('semiBig'),
-        big.named('big'),
+        small6.named('small6'),
+        small8.named('small8'),
+        regular15.named('regular15'),
+        regular18.named('regular15'),
+        big25.named('big25'),
+        big30.named('big30'),
+        big35.named('big35'),
+        large97.named('large97')
       ];
 }
 
 class AppEdgeInsetsSpacingData extends Equatable {
   const AppEdgeInsetsSpacingData(this._spacing);
 
-  EdgeInsets get small => EdgeInsets.all(_spacing.small);
+  EdgeInsets get small6 => EdgeInsets.all(_spacing.small6);
 
-  EdgeInsets get semiSmall => EdgeInsets.all(_spacing.semiSmall);
+  EdgeInsets get small8 => EdgeInsets.all(_spacing.small8);
 
-  EdgeInsets get regular => EdgeInsets.all(_spacing.regular);
+  EdgeInsets get regular15 => EdgeInsets.all(_spacing.regular15);
 
-  EdgeInsets get semiBig => EdgeInsets.all(_spacing.semiBig);
+  EdgeInsets get regular18 => EdgeInsets.all(_spacing.regular18);
 
-  EdgeInsets get big => EdgeInsets.all(_spacing.big);
+  EdgeInsets get big25 => EdgeInsets.all(_spacing.big25);
+
+  EdgeInsets get big30 => EdgeInsets.all(_spacing.big30);
+
+  EdgeInsets get big35 => EdgeInsets.all(_spacing.big35);
 
   final AppSpacingData _spacing;
 

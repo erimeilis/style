@@ -134,9 +134,9 @@ class AppButtonMenuLayout extends StatelessWidget {
     return AnimatedContainer(
         duration: theme.durations.quick,
         child: AppContainer(
-          padding: const AppEdgeInsets.only(top: AppGapSize.regular, bottom: AppGapSize.regular, left: AppGapSize.big),
+          padding: const AppEdgeInsets.only(top: AppGapSize.regular15, bottom: AppGapSize.regular15, left: AppGapSize.big35),
           child: Row(children: [
-            AppContainer(padding: const AppEdgeInsets.only(left: AppGapSize.big, right: AppGapSize.semiBig), child: Icon(icon, color: iconColor, size: 32)),
+            AppContainer(padding: const AppEdgeInsets.only(left: AppGapSize.big35, right: AppGapSize.big25), child: Icon(icon, color: iconColor, size: 32)),
             AppText.button(
               title,
               color: textColor,
