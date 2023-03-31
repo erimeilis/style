@@ -1,5 +1,5 @@
-import 'package:style/src/utils/named.dart';
 import 'package:equatable/equatable.dart';
+import 'package:style/src/utils/named.dart';
 
 class AppIconsData extends Equatable {
   const AppIconsData({
@@ -80,7 +80,7 @@ class AppIconSizesData extends Equatable {
 
   factory AppIconSizesData.regular() => const AppIconSizesData(
         small: 22.0,
-        regular: 32.0,
+        regular: 34.0,
         big: 64.0,
       );
 

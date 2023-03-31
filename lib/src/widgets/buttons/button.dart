@@ -12,32 +12,36 @@ enum AppButtonLevel {
   title3,
 }
 
-class AppButton extends StatelessWidget {
-  const AppButton({
-    Key? key,
-    required this.title,
-    this.onTap,
-    this.mainAxisSize = MainAxisSize.min,
-    this.level = AppButtonLevel.p18,
-  }) : super(key: key);
+class AppButton extends StatefulWidget {
+  const AppButton({Key? key, required this.title, this.onTap, this.mainAxisSize = MainAxisSize.min, this.level = AppButtonLevel.p18, this.width, this.height})
+      : super(key: key);
 
   const AppButton.button({
     Key? key,
     required this.title,
     this.onTap,
     this.mainAxisSize = MainAxisSize.min,
+    this.width,
+    this.height,
   })  : level = AppButtonLevel.button,
         super(key: key);
 
   final String title;
   final MainAxisSize mainAxisSize;
+  final double? width;
+  final double? height;
   final VoidCallback? onTap;
   final AppButtonLevel level;
 
   @override
+  _AppButtonState createState() => _AppButtonState();
+}
+
+class _AppButtonState extends State<AppButton> {
+  @override
   Widget build(BuildContext context) {
     return TapBuilder(
-      onTap: onTap,
+      onTap: widget.onTap,
       builder: (context, state, hasFocus) {
         switch (state) {
           case TapState.hover:
@@ -45,40 +49,28 @@ class AppButton extends StatelessWidget {
               enabled: true,
               selected: true,
               child: AppButtonLayout.hovered(
-                title: title,
-                level: level,
-                mainAxisSize: mainAxisSize,
-              ),
+                  title: widget.title, level: widget.level, mainAxisSize: widget.mainAxisSize, width: widget.width, height: widget.height),
             );
           case TapState.pressed:
             return Semantics(
               enabled: true,
               selected: true,
               child: AppButtonLayout.pressed(
-                title: title,
-                level: level,
-                mainAxisSize: mainAxisSize,
-              ),
+                  title: widget.title, level: widget.level, mainAxisSize: widget.mainAxisSize, width: widget.width, height: widget.height),
             );
           case TapState.disabled:
             return Semantics(
               enabled: true,
               selected: true,
               child: AppButtonLayout.disabled(
-                title: title,
-                level: level,
-                mainAxisSize: mainAxisSize,
-              ),
+                  title: widget.title, level: widget.level, mainAxisSize: widget.mainAxisSize, width: widget.width, height: widget.height),
             );
           default:
             return Semantics(
               enabled: true,
               selected: true,
               child: AppButtonLayout.inactive(
-                title: title,
-                level: level,
-                mainAxisSize: mainAxisSize,
-              ),
+                  title: widget.title, level: widget.level, mainAxisSize: widget.mainAxisSize, width: widget.width, height: widget.height),
             );
         }
       },
@@ -108,6 +100,8 @@ class AppButtonLayout extends StatelessWidget {
     this.hoveredBackgroundColor2,
     this.pressedBackgroundColor2,
     this.foregroundColor,
+    this.width,
+    this.height,
   })  : _state = AppButtonState.inactive,
         super(key: key);
 
@@ -125,6 +119,8 @@ class AppButtonLayout extends StatelessWidget {
     this.hoveredBackgroundColor2,
     this.pressedBackgroundColor2,
     this.foregroundColor,
+    this.width,
+    this.height,
   })  : _state = AppButtonState.disabled,
         super(key: key);
 
@@ -142,6 +138,8 @@ class AppButtonLayout extends StatelessWidget {
     this.hoveredBackgroundColor2,
     this.pressedBackgroundColor2,
     this.foregroundColor,
+    this.width,
+    this.height,
   })  : _state = AppButtonState.hovered,
         super(key: key);
 
@@ -159,12 +157,16 @@ class AppButtonLayout extends StatelessWidget {
     this.hoveredBackgroundColor2,
     this.pressedBackgroundColor2,
     this.foregroundColor,
+    this.width,
+    this.height,
   })  : _state = AppButtonState.pressed,
         super(key: key);
 
   final String title;
   final AppButtonLevel level;
   final MainAxisSize mainAxisSize;
+  final double? width;
+  final double? height;
   final AppButtonState _state;
   final Color? inactiveBackgroundColor1;
   final Color? disabledBackgroundColor1;
@@ -250,9 +252,16 @@ class AppButtonLayout extends StatelessWidget {
         borderRadius: theme.radius.asBorderRadius().big,
         gradient: LinearGradient(begin: const Alignment(0.14, 0.2), end: const Alignment(0.86, 0.8), colors: [backgroundColor1, backgroundColor2]),
       ),
-      child: AppContainer(
-          padding: const AppEdgeInsets.symmetric(vertical: AppGapSize.regular18, horizontal: AppGapSize.large97),
-          child: AppText(title, color: foregroundColor, fontWeight: fontWeight, level: textlevel)),
+      child: (width == null && height == null)
+          ? AppContainer(
+              alignment: Alignment.center,
+              padding: const AppEdgeInsets.symmetric(vertical: AppGapSize.regular18, horizontal: AppGapSize.large97),
+              child: AppText(title, color: foregroundColor, fontWeight: fontWeight, level: textlevel))
+          : AppContainer(
+              width: width,
+              height: height,
+              alignment: Alignment.center,
+              child: AppText(title, color: foregroundColor, fontWeight: fontWeight, level: textlevel)),
     );
   }
 }

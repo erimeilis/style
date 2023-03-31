@@ -1,7 +1,6 @@
-import 'package:style/src/utils/named.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:style/src/utils/named.dart';
 
 class AppTypographyData extends Equatable {
   const AppTypographyData({
@@ -15,111 +14,111 @@ class AppTypographyData extends Equatable {
     required this.title3,
   });
 
-  factory AppTypographyData.regular() => AppTypographyData(
-        button: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+  factory AppTypographyData.regular() => const AppTypographyData(
+        button: TextStyle(
+          fontFamily: 'Montserrat',
           fontWeight: FontWeight.w500,
           fontSize: 24,
           height: 1.2,
           decoration: TextDecoration.none,
-        )),
-        p18: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        p18: TextStyle(
+          fontFamily: 'Montserrat',
           fontWeight: FontWeight.w400,
           fontSize: 18,
           height: 1.2,
           decoration: TextDecoration.none,
-        )),
-        p20: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        p20: TextStyle(
+          fontFamily: 'Montserrat',
           fontWeight: FontWeight.w500,
           fontSize: 20,
           height: 1.2,
           decoration: TextDecoration.none,
-        )),
-        p24: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        p24: TextStyle(
+          fontFamily: 'Montserrat',
           fontWeight: FontWeight.w400,
           fontSize: 24,
           height: 1.2,
           decoration: TextDecoration.none,
-        )),
-        paragraph2: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        paragraph2: TextStyle(
+          fontFamily: 'Montserrat',
           fontWeight: FontWeight.w400,
           fontSize: 10,
           decoration: TextDecoration.none,
-        )),
-        t36: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        t36: TextStyle(
+          fontFamily: 'Montserrat',
           fontSize: 36,
           fontWeight: FontWeight.w700,
           decoration: TextDecoration.none,
-        )),
-        title2: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        title2: TextStyle(
+          fontFamily: 'Montserrat',
           fontSize: 18,
           fontWeight: FontWeight.bold,
           decoration: TextDecoration.none,
-        )),
-        title3: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        title3: TextStyle(
+          fontFamily: 'Montserrat',
           fontSize: 14,
           fontWeight: FontWeight.bold,
           decoration: TextDecoration.none,
-        )),
+        ),
       );
 
-  factory AppTypographyData.small() => AppTypographyData(
-        button: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+  factory AppTypographyData.small() => const AppTypographyData(
+        button: TextStyle(
+          fontFamily: 'Montserrat',
           fontWeight: FontWeight.w500,
           fontSize: 18,
           height: 1.2,
           decoration: TextDecoration.none,
-        )),
-        p18: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        p18: TextStyle(
+          fontFamily: 'Montserrat',
           fontWeight: FontWeight.w400,
           fontSize: 12,
           decoration: TextDecoration.none,
-        )),
-        p20: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        p20: TextStyle(
+          fontFamily: 'Montserrat',
           fontWeight: FontWeight.w400,
           fontSize: 16,
           decoration: TextDecoration.none,
-        )),
-        p24: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        p24: TextStyle(
+          fontFamily: 'Montserrat',
           fontWeight: FontWeight.w400,
           fontSize: 18,
           decoration: TextDecoration.none,
-        )),
-        paragraph2: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        paragraph2: TextStyle(
+          fontFamily: 'Montserrat',
           fontWeight: FontWeight.w400,
           fontSize: 9,
           decoration: TextDecoration.none,
-        )),
-        t36: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        t36: TextStyle(
+          fontFamily: 'Montserrat',
           fontSize: 22,
           fontWeight: FontWeight.bold,
           decoration: TextDecoration.none,
-        )),
-        title2: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        title2: TextStyle(
+          fontFamily: 'Montserrat',
           fontSize: 14,
           fontWeight: FontWeight.bold,
           decoration: TextDecoration.none,
-        )),
-        title3: GoogleFonts.montserrat(
-            textStyle: const TextStyle(
+        ),
+        title3: TextStyle(
+          fontFamily: 'Montserrat',
           fontSize: 12,
           fontWeight: FontWeight.bold,
           decoration: TextDecoration.none,
-        )),
+        ),
       );
 
   final TextStyle button;

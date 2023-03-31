@@ -1,5 +1,5 @@
-import 'package:style/src/theme/theme.dart';
 import 'package:flutter/widgets.dart';
+import 'package:style/src/theme/theme.dart';
 
 import 'padding.dart';
 

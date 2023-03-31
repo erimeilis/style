@@ -1,5 +1,7 @@
-import 'package:style/src/theme/theme.dart';
 import 'package:flutter/widgets.dart';
+import 'package:style/src/theme/theme.dart';
+import 'package:style/style.dart';
+import 'package:tap_builder/tap_builder.dart';
 
 enum AppIconSize {
   small,
@@ -25,6 +27,8 @@ class AppIcon extends StatelessWidget {
     this.data, {
     Key? key,
     this.color,
+    this.active = false,
+    this.onTap,
     this.size = AppIconSize.regular,
   }) : super(key: key);
 
@@ -32,6 +36,8 @@ class AppIcon extends StatelessWidget {
     this.data, {
     Key? key,
     this.color,
+    this.active = false,
+    this.onTap,
   })  : size = AppIconSize.small,
         super(key: key);
 
@@ -39,6 +45,8 @@ class AppIcon extends StatelessWidget {
     this.data, {
     Key? key,
     this.color,
+    this.active = false,
+    this.onTap,
   })  : size = AppIconSize.regular,
         super(key: key);
 
@@ -46,62 +54,99 @@ class AppIcon extends StatelessWidget {
     this.data, {
     Key? key,
     this.color,
+    this.active = false,
+    this.onTap,
   })  : size = AppIconSize.big,
         super(key: key);
 
   final IconData data;
   final Color? color;
+  final bool active;
+  final VoidCallback? onTap;
   final AppIconSize size;
 
   @override
   Widget build(BuildContext context) {
-    final theme = AppTheme.of(context);
-    final color = this.color ?? theme.colors.icons;
-    return Icon(data, color: color);
+    return onTap != null
+        ? TapBuilder(
+            onTap: onTap,
+            builder: (context, state, hasFocus) {
+              if (active) {
+                return Semantics(
+                  enabled: true,
+                  selected: true,
+                  child: AppIconLayout.pressed(data: data, size: size, color: color, onTap: onTap),
+                );
+              }
+              switch (state) {
+                case TapState.hover:
+                  return Semantics(
+                    enabled: true,
+                    selected: true,
+                    child: AppIconLayout.hovered(data: data, size: size, color: color, onTap: onTap),
+                  );
+                case TapState.pressed:
+                  return Semantics(
+                    enabled: true,
+                    selected: true,
+                    child: AppIconLayout.pressed(data: data, size: size, color: color, onTap: onTap),
+                  );
+                default:
+                  return Semantics(
+                    enabled: true,
+                    selected: true,
+                    child: AppIconLayout.inactive(data: data, size: size, color: color, onTap: onTap),
+                  );
+              }
+            },
+          )
+        : Semantics(
+            enabled: true,
+            selected: true,
+            child: AppIconLayout.inactive(data: data, size: size, color: color, onTap: onTap),
+          );
   }
 }
 
-class AppAnimatedIcon extends StatelessWidget {
-  const AppAnimatedIcon(
-    this.data, {
-    Key? key,
-    this.color,
-    this.size = AppIconSize.small,
-    this.duration = const Duration(milliseconds: 200),
-  }) : super(key: key);
+enum AppIconState {
+  inactive,
+  hovered,
+  pressed,
+}
+
+class AppIconLayout extends StatelessWidget {
+  const AppIconLayout.inactive({Key? key, required this.data, this.color, this.onTap, required this.size})
+      : _state = AppIconState.inactive,
+        super(key: key);
+
+  const AppIconLayout.hovered({Key? key, required this.data, this.color, this.onTap, required this.size})
+      : _state = AppIconState.hovered,
+        super(key: key);
+
+  const AppIconLayout.pressed({Key? key, required this.data, this.color, this.onTap, required this.size})
+      : _state = AppIconState.pressed,
+        super(key: key);
 
   final IconData data;
   final Color? color;
+  final VoidCallback? onTap;
   final AppIconSize size;
-  final Duration duration;
-
-  bool get isAnimated => duration.inMilliseconds > 0;
+  final AppIconState _state;
 
   @override
   Widget build(BuildContext context) {
     final theme = AppTheme.of(context);
-    final color = this.color ?? theme.colors.icons;
-    if (!isAnimated) {
-      return AppIcon(
-        data,
-        key: key,
-        color: color,
-        size: size,
-      );
-    }
-    return AnimatedDefaultTextStyle(
-      style: TextStyle(
-        fontFamily: theme.icons.fontFamily,
-        package: theme.icons.fontPackage,
-        color: color,
-        fontSize: theme.icons.sizes.resolve(size),
-        decoration: TextDecoration.none,
-      ),
-      duration: duration,
-      child: Icon(
-        data,
-        color: color,
-      ),
-    );
+    final iconColor = () {
+      switch (_state) {
+        case AppIconState.inactive:
+          return color ?? theme.colors.icons;
+        case AppIconState.hovered:
+          return theme.colors.click;
+        case AppIconState.pressed:
+          return theme.colors.click;
+      }
+    }();
+
+    return AnimatedContainer(duration: theme.durations.quick, child: Icon(data, color: iconColor));
   }
 }

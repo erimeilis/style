@@ -9,7 +9,7 @@ class AppDropdownButton<T> extends StatelessWidget {
     this.value,
     required this.onChanged,
     this.hint,
-    this.textLevel = AppTextLevel.p24,
+    this.textLevel = AppTextLevel.p18,
   }) : super(key: key);
 
   final String title;
@@ -44,14 +44,16 @@ class AppDropdownButton<T> extends StatelessWidget {
       }
     }();
     return DropdownButtonFormField<T?>(
+      dropdownColor: theme.colors.bg2,
       decoration: InputDecoration(
         disabledBorder: InputBorder.none,
-        enabledBorder: InputBorder.none,
-        focusedBorder: InputBorder.none,
-        // filled: true,
+        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: theme.colors.grey)),
+        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: theme.colors.greyLight)),
+        filled: true,
         labelText: title,
+        labelStyle: style.copyWith(color: theme.colors.grey),
       ),
-      hint: hint,
+      //hint: hint,
       value: value,
       onChanged: onChanged,
       items: items,

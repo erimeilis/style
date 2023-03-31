@@ -1,5 +1,5 @@
-import 'package:style/src/theme/theme.dart';
 import 'package:flutter/widgets.dart';
+import 'package:style/src/theme/theme.dart';
 
 enum AppTextLevel {
   button,
@@ -39,6 +39,7 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.fontWeight,
     this.replace,
+    this.underline = false,
     this.level = AppTextLevel.p24,
   }) : super(key: key);
 
@@ -51,6 +52,7 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.fontWeight,
     this.replace,
+    this.underline = false,
   })  : level = AppTextLevel.button,
         super(key: key);
 
@@ -63,6 +65,7 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.fontWeight,
     this.replace,
+    this.underline = false,
   })  : level = AppTextLevel.p18,
         super(key: key);
 
@@ -75,6 +78,7 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.fontWeight,
     this.replace,
+    this.underline = false,
   })  : level = AppTextLevel.p20,
         super(key: key);
 
@@ -87,6 +91,7 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.fontWeight,
     this.replace,
+    this.underline = false,
   })  : level = AppTextLevel.p24,
         super(key: key);
 
@@ -99,6 +104,7 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.fontWeight,
     this.replace,
+    this.underline = false,
   })  : level = AppTextLevel.paragraph2,
         super(key: key);
 
@@ -111,6 +117,7 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.fontWeight,
     this.replace,
+    this.underline = false,
   })  : level = AppTextLevel.t36,
         super(key: key);
 
@@ -123,6 +130,7 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.fontWeight,
     this.replace,
+    this.underline = false,
   })  : level = AppTextLevel.title2,
         super(key: key);
 
@@ -135,6 +143,7 @@ class AppText extends StatelessWidget {
     this.textAlign,
     this.fontWeight,
     this.replace,
+    this.underline = false,
   })  : level = AppTextLevel.title3,
         super(key: key);
 
@@ -145,6 +154,7 @@ class AppText extends StatelessWidget {
   final FontWeight? fontWeight;
   final int? maxLines;
   final TextAlign? textAlign;
+  final bool underline;
   final List<InlineSpan>? replace;
 
   @override
@@ -173,21 +183,43 @@ class AppText extends StatelessWidget {
     }();
     final textAlign = this.textAlign;
     final List<InlineSpan> r = replace ?? [];
+    final decoration = underline ? TextDecoration.underline : null;
     if (r.isNotEmpty) {
-      return RichText(
-        text: TextSpan(
-            style: style.copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight),
-            children: data
-                .splitWithDelim(RegExp(r'#\d'))
-                .map((e) => RegExp(r'#\d').hasMatch(e)
-                    ? r.asMap().containsKey(int.parse(e.substring(1)))
-                        ? r[int.parse(e.substring(1))]
-                        : const TextSpan()
-                    : TextSpan(text: e))
-                .toList()),
-        textAlign: textAlign ?? TextAlign.center,
-      );
+      return Container(
+          margin: EdgeInsets.fromLTRB(0, underline ? 10 : 0, 0, 0),
+          child: RichText(
+            text: TextSpan(
+                style: style.copyWith(
+                    shadows: underline ? [Shadow(color: color, offset: const Offset(0, -5))] : null,
+                    color: color.withOpacity(underline ? 0 : 1),
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    decoration: decoration,
+                    decorationColor: theme.colors.click,
+                    decorationThickness: 2),
+                children: data
+                    .splitWithDelim(RegExp(r'#\d'))
+                    .map((e) => RegExp(r'#\d').hasMatch(e)
+                        ? r.asMap().containsKey(int.parse(e.substring(1)))
+                            ? r[int.parse(e.substring(1))]
+                            : const TextSpan()
+                        : TextSpan(text: e))
+                    .toList()),
+            textAlign: textAlign ?? TextAlign.center,
+          ));
     }
-    return Text(data, style: style.copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight), maxLines: maxLines, textAlign: textAlign);
+    return Container(
+        margin: EdgeInsets.fromLTRB(0, underline ? 10 : 0, 0, 0),
+        child: Text(data,
+            style: style.copyWith(
+                shadows: underline ? [Shadow(color: color, offset: const Offset(0, -5))] : null,
+                color: color.withOpacity(underline ? 0 : 1),
+                fontSize: fontSize,
+                fontWeight: fontWeight,
+                decoration: decoration,
+                decorationColor: theme.colors.click,
+                decorationThickness: 2),
+            maxLines: maxLines,
+            textAlign: textAlign));
   }
 }
