@@ -18,7 +18,7 @@ class ButtonRow extends StatelessWidget {
         Expanded(
           child: AppTextLink(
             onTap: () {
-              Navigator.of(context).pop<DateTime>();
+              Navigator.pop<List<DateTime>>(context, null);
             },
             title: localizations.cancelButtonLabel,
             fontSize: 18,
