@@ -5,6 +5,7 @@ export 'buttons/button_login.dart';
 export 'buttons/button_menu.dart';
 export 'cards/card_number.dart';
 export 'cards/card_product.dart';
+export 'cards/card_sms.dart';
 export 'form/app_datetime_picker.dart';
 export 'form/dropdown_button.dart';
 export 'form/text_input.dart';
